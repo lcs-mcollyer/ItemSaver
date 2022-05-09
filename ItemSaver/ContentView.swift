@@ -8,9 +8,34 @@
 import SwiftUI
 
 struct ContentView: View {
+   
+//    @State var URL : String
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        
+        VStack{
+            
+            //need to find generic image first
+            Image("Speedster")
+            
+            
+            //Text field for title
+            Text("Enter Title")
+            
+            // Text field for numerical value
+            Text("Enter $")
+            
+            // Text field to save live url link
+           Text("Enter URL")
+                .foregroundColor(.blue)
+//                .textFieldStyle(.bordered)
+            
+            Button(action: {}, label: {Text("Confirm and Save")})
+                .buttonStyle(.bordered)
+            
+        }
+        .padding()
+        
     }
 }
 
