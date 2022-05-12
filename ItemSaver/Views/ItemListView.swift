@@ -17,44 +17,52 @@ struct ItemListView: View {
         
         NavigationView {
             VStack{
+                
+                List {
+                    ForEach(items) { currentItem in
+                            VStack{
+                                Text(currentItem.name)
+                                Text(currentItem.price)
+                                
+                                Link("Website", destination: URL(string: currentItem.url)!)
+                                    .foregroundColor(.blue)
+                                    
+                                //                                  ^
+                                // Takes the users inputeed Url and |
+                                // Allows me to have the website linked to a pahrase such as "Website"
+                                
+                            }
+                        }
+                    .onDelete(perform: delete)
+                }
+               
+               
+                
+                .navigationTitle("Items")
+                //Simply the title above the item list
+                .toolbar{
+                    ToolbarItem(placement: .primaryAction) {
+                        
+                        Button(action: {
+                            // Change it from the innital flase boolean to true in order
+                            // To show the page.
+                            isAddNewItemShowing = true
+                            
+                        }, label: {
+                            // Shows the + in hte top right
+                            Text("+")
+                                .font(.title)
+                                            
+                        })
+                        
+                    }
+                }
+            }
            
-            
-            List(items) { currentItem in
-                VStack{
-                    Text(currentItem.name)
-                    Text(currentItem.price)
-                    Link("Website", destination: URL(string: currentItem.url)!)
-                        .foregroundColor(.blue)
-//
-                    
-                   
-//                    Text("URL")
-                
-                
-                }
-            }
-            .navigationTitle("Items")
-                
-            .toolbar{
-                ToolbarItem(placement: .primaryAction) {
-                    
-                    Button(action: {
-                        isAddNewItemShowing = true
-                        
-                    }, label: {
-                        
-                        Text("Add")
-    //                        .foregroundColor(.black)
-    //                        .font(.title)
-                    })
-                    
-                }
-            }
         }
-        }
-//        .font(.title)
-       
-       
+             
+        
+        
         .sheet(isPresented: $isAddNewItemShowing) {
             AddNewItem(items: $items,
                        isAddNewItemShowing: $isAddNewItemShowing)
@@ -62,6 +70,9 @@ struct ItemListView: View {
         
         
     }
+    
+    func delete(at offsets: IndexSet) {
+            items.remove(atOffsets: offsets)
 }
 
 struct ItemListView_Previews: PreviewProvider {
