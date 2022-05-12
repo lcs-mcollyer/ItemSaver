@@ -16,33 +16,45 @@ struct ItemListView: View {
     var body: some View {
         
         NavigationView {
+            VStack{
+           
             
             List(items) { currentItem in
                 VStack{
-                Text(currentItem.name)
+                    Text(currentItem.name)
                     Text(currentItem.price)
+                    Link("Website", destination: URL(string: currentItem.url)!)
+                        .foregroundColor(.blue)
+//
+                    
+                   
+//                    Text("URL")
+                
+                
                 }
             }
             .navigationTitle("Items")
-        }
-        
-//        .font(.title)
-       
-        .toolbar{
-            ToolbarItem(placement: .primaryAction) {
                 
-                Button(action: {
-                    isAddNewItemShowing = true
+            .toolbar{
+                ToolbarItem(placement: .primaryAction) {
                     
-                }, label: {
+                    Button(action: {
+                        isAddNewItemShowing = true
+                        
+                    }, label: {
+                        
+                        Text("Add")
+    //                        .foregroundColor(.black)
+    //                        .font(.title)
+                    })
                     
-                    Text("Add New Item")
-                        .foregroundColor(.black)
-                        .font(.title)
-                })
-                
+                }
             }
         }
+        }
+//        .font(.title)
+       
+       
         .sheet(isPresented: $isAddNewItemShowing) {
             AddNewItem(items: $items,
                        isAddNewItemShowing: $isAddNewItemShowing)
