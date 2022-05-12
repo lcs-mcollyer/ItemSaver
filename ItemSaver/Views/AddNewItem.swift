@@ -16,6 +16,8 @@ struct AddNewItem: View {
     
     @State var newItemName = ""
     
+    @State var newItemPrice = ""
+    
     var body: some View {
         NavigationView {
             
@@ -24,8 +26,12 @@ struct AddNewItem: View {
                     .padding()
                 
                 Spacer()
+                TextField("Enter Item Price", text: $newItemPrice)
             }
+        
+            // MARK: Need this to be linked to the actual page.
             .navigationTitle("Add Item")
+          
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     
@@ -38,7 +44,7 @@ struct AddNewItem: View {
                         let newId = items.count + 1
                         
                        
-                        let newItem = Item(id: newId, name: newItemName)
+                        let newItem = Item(id: newId, name: newItemName, price: newItemPrice)
                         
                         
                         items.append(newItem)

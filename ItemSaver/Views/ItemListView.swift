@@ -18,11 +18,15 @@ struct ItemListView: View {
         NavigationView {
             
             List(items) { currentItem in
+                VStack{
                 Text(currentItem.name)
+                    Text(currentItem.price)
+                }
             }
+            .navigationTitle("Items")
         }
-        .navigationTitle("Items")
-        .foregroundColor(.black)
+        
+//        .font(.title)
        
         .toolbar{
             ToolbarItem(placement: .primaryAction) {
@@ -34,6 +38,7 @@ struct ItemListView: View {
                     
                     Text("Add New Item")
                         .foregroundColor(.black)
+                        .font(.title)
                 })
                 
             }
